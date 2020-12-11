@@ -40,9 +40,23 @@ const Home = ({navigation, route}: any): JSX.Element => {
     setLoading(false);
   };
 
-  const deleteList = async (id: any) => {};
+  const deleteSeason = async (id: any) => {
+    const newList = await listOfSeasons.filter((list: any) => list.id == id);
+    await AsyncStorage.setItem('@season_list', JSON.stringify(newList));
 
-  const markComplete = async (id: any) => {};
+    setListofSeasons(newList);
+  };
+
+  const markComplete = async (id: any) => {
+    const newList: any = listOfSeasons.map((list: any) => {
+      if (list.id == id) {
+        list.isWatched = !list.isWatched;
+      }
+      return list;
+    });
+    await AsyncStorage.setItem('@season_list', JSON.stringify(newList));
+    setListofSeasons(newList);
+  };
 
   useEffect(() => {
     getList();
@@ -69,7 +83,10 @@ const Home = ({navigation, route}: any): JSX.Element => {
                 {listOfSeasons.map((season: any) => (
                   <ListItem key={season.id} style={styles.listItem}>
                     <Left>
-                      <Button style={styles.actionButton} danger>
+                      <Button
+                        style={styles.actionButton}
+                        danger
+                        onPress={() => deleteSeason(season.id)}>
                         <Icon name="trash" active />
                       </Button>
                       <Button style={styles.actionButton}>
@@ -81,7 +98,10 @@ const Home = ({navigation, route}: any): JSX.Element => {
                       <Text note>{season.totalSeason} seasons to watch</Text>
                     </Body>
                     <Right>
-                      <CheckBox />
+                      <CheckBox
+                        checked={season.isWatched}
+                        onPress={() => markComplete(season.id)}
+                      />
                     </Right>
                   </ListItem>
                 ))}
