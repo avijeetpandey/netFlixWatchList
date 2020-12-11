@@ -19,7 +19,7 @@ const App = (): JSX.Element => {
           component={Home}
           options={{
             headerStyle: {
-              backgroundColor: '#of4c75',
+              backgroundColor: '#0f4c75',
             },
             title: 'Netflix WatchList',
             headerTitleStyle: {
@@ -33,7 +33,7 @@ const App = (): JSX.Element => {
           component={Add}
           options={{
             headerStyle: {
-              backgroundColor: '#of4c75',
+              backgroundColor: '#0f4c75',
             },
             title: 'Netflix WatchList',
             headerTitleStyle: {
@@ -47,7 +47,7 @@ const App = (): JSX.Element => {
           component={Edit}
           options={{
             headerStyle: {
-              backgroundColor: '#of4c75',
+              backgroundColor: '#0f4c75',
             },
             title: 'Netflix WatchList',
             headerTitleStyle: {

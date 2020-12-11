@@ -1,19 +1,20 @@
 import React from 'react';
-import {SafeAreaView, Text , StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
+import {Fab, Icon} from 'native-base';
 
-const Home = () => {
+const Home = (): JSX.Element => {
   return (
     <>
-      <SafeAreaView>
-        <Text>Home Page</Text>
-        <Text>This is amazing</Text>
-      </SafeAreaView>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Fab style={{backgroundColor: '#5067FF'}} position="bottomRight">
+          <Icon name="add" />
+        </Fab>
+      </ScrollView>
     </>
   );
 };
 
 export default Home;
-
 
 const styles = StyleSheet.create({
   emptyContainer: {
