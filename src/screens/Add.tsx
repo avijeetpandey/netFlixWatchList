@@ -5,7 +5,7 @@ const Add = () => {
   return (
     <>
       <SafeAreaView>
-        <Text>Home Page</Text>
+        <Text>This is the Add Page</Text>
         <Text>This is amazing</Text>
       </SafeAreaView>
     </>
