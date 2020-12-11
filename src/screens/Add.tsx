@@ -1,13 +1,32 @@
-import React from 'react';
-import {SafeAreaView, Text, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {Text, StyleSheet, ScrollView} from 'react-native';
+import {Container, Form, Item, Input, Button, H1} from 'native-base';
+
+import shortId from 'shortid';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Add = () => {
+  const [name, setName] = useState('');
+  const [totalSeason, setTotalSeason] = useState('');
+
   return (
     <>
-      <SafeAreaView>
-        <Text>This is the Add Page</Text>
-        <Text>This is amazing</Text>
-      </SafeAreaView>
+      <Container style={styles.container}>
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <H1 style={styles.heading}>Add to watch List</H1>
+          <Form>
+            <Item rounded style={styles.formItem}>
+              <Input placeholder="Season Name" style={{color: '#eee'}} />
+            </Item>
+            <Item rounded style={styles.formItem}>
+              <Input placeholder="Total Seasons" style={{color: '#eee'}} />
+            </Item>
+            <Button rounded block>
+              <Text style={{color: '#eee'}}>Add</Text>
+            </Button>
+          </Form>
+        </ScrollView>
+      </Container>
     </>
   );
 };
