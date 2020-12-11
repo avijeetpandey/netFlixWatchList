@@ -19,10 +19,13 @@ import {
 } from 'native-base';
 
 import AsyncStorage from '@react-native-community/async-storage';
+import {useIsFocused} from '@react-navigation/native';
 
 const Home = ({navigation, route}: any): JSX.Element => {
   const [listOfSeasons, setListofSeasons] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const isFocused = useIsFocused();
 
   const getList = async () => {
     setLoading(true);
@@ -37,13 +40,13 @@ const Home = ({navigation, route}: any): JSX.Element => {
     setLoading(false);
   };
 
-  const deleteList = async () => {};
+  const deleteList = async (id: any) => {};
 
-  const markComplete = async () => {};
+  const markComplete = async (id: any) => {};
 
   useEffect(() => {
     getList();
-  }, []);
+  }, [isFocused]);
 
   return (
     <>
