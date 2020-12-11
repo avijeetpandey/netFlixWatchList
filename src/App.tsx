@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 const App = (): JSX.Element => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Add">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={Home}

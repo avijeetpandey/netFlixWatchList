@@ -1,18 +1,99 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
-import {Fab, Icon} from 'native-base';
+import {
+  Fab,
+  List,
+  ListItem,
+  Icon,
+  Button,
+  Body,
+  Left,
+  Right,
+  Subtitle,
+  CheckBox,
+  H1,
+  Text,
+  Container,
+  Title,
+  Spinner,
+} from 'native-base';
 
-const Home = ({navigation, route}): JSX.Element => {
+import AsyncStorage from '@react-native-community/async-storage';
+
+const Home = ({navigation, route}: any): JSX.Element => {
+  const [listOfSeasons, setListofSeasons] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const getList = async () => {
+    setLoading(true);
+    const storedValue: any = await AsyncStorage.getItem('@season_list');
+    if (!storedValue) {
+      setListofSeasons([]);
+    }
+
+    const list = JSON.parse(storedValue);
+
+    setListofSeasons(list);
+    setLoading(false);
+  };
+
+  const deleteList = async () => {};
+
+  const markComplete = async () => {};
+
+  useEffect(() => {
+    getList();
+  }, []);
+
   return (
     <>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Fab
-          style={{backgroundColor: '#5067FF'}}
-          position="bottomRight"
-          onPress={() => navigation.navigate('Add')}>
-          <Icon name="add" />
-        </Fab>
-      </ScrollView>
+      {loading ? (
+        <Container style={styles.container}>
+          <Spinner color="#00b7c2" />
+        </Container>
+      ) : (
+        <ScrollView contentContainerStyle={styles.container}>
+          {listOfSeasons.length === 0 ? (
+            <Container style={styles.container}>
+              <H1 style={styles.heading}>
+                Watch List is empty . Please add a season
+              </H1>
+            </Container>
+          ) : (
+            <>
+              <H1 style={styles.heading}>Next Series to watch</H1>
+              <List>
+                {listOfSeasons.map((season: any) => (
+                  <ListItem key={season.id} style={styles.listItem}>
+                    <Left>
+                      <Button style={styles.actionButton} danger>
+                        <Icon name="trash" active />
+                      </Button>
+                      <Button style={styles.actionButton}>
+                        <Icon name="edit" type="Feather" active />
+                      </Button>
+                    </Left>
+                    <Body>
+                      <Title style={styles.seasonName}>{season.name}</Title>
+                      <Text note>{season.totalSeason} seasons to watch</Text>
+                    </Body>
+                    <Right>
+                      <CheckBox />
+                    </Right>
+                  </ListItem>
+                ))}
+              </List>
+            </>
+          )}
+
+          <Fab
+            style={{backgroundColor: '#5067FF'}}
+            position="bottomRight"
+            onPress={() => navigation.navigate('Add')}>
+            <Icon name="add" />
+          </Fab>
+        </ScrollView>
+      )}
     </>
   );
 };
